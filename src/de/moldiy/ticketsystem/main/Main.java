@@ -1,7 +1,7 @@
 package de.moldiy.ticketsystem.main;
 
-import de.moldiy.ticketsystem.ComandExecuted;
-import de.moldiy.ticketsystem.ConsoleControl;
+import de.moldiy.ticketsystem.console.ComandExecuter;
+import de.moldiy.ticketsystem.console.ConsoleControl;
 import de.moldiy.ticketsystem.ticket.Ticket;
 
 public class Main {
@@ -11,13 +11,13 @@ public class Main {
 	
 	public static void main(String[] args) {
 		
-		ticketsystem.addTicket(new Ticket(1, "fehler", "schrechloicker inhalt"));
+		ticketsystem.addTicket(new Ticket(1, "einTicket", "schrechloicker Inhalt"));
 		
-		console.registerComand("open", new ComandExecuted() {
+		ComandExecuter openCommand = new ComandExecuter() {
 			@Override
 			public void executeComand(String[] args) {
 				if(args == null) {
-					System.out.println("befehl falsch: open <name des Tickets>");
+					System.out.println("befehl falsch: "+ getComandDescription());
 				} else {
 					Ticket ticket = ticketsystem.findTicket(args[0]);
 					if(ticket != null) {
@@ -25,17 +25,17 @@ public class Main {
 					} else {
 						System.out.println("ticket exestiert nicht!");
 					}
-					
 				}
-				
 			}
-		});
+		};
+		openCommand.setComandDescription("open <name des Tickets> (zeigt den inhalt des tickets an)");
+		console.registerComand("open", openCommand);
 		
-		console.registerComand("contact", new ComandExecuted() {
+		ComandExecuter contactCommand = new ComandExecuter() {
 			@Override
 			public void executeComand(String[] args) {
 				if(args == null) {
-					System.out.println("befehl falsch: contact <ticketName> <betreff> <Nachricht>");
+					System.out.println("befehl falsch: " + getComandDescription());
 				} else {
 					if(args.length == 3) {
 						Ticket ticket = ticketsystem.findTicket(args[0]);
@@ -46,7 +46,10 @@ public class Main {
 					}
 				}
 			}
-		});
+		};
+		contactCommand.setComandDescription("contact <ticketName> <betreff> <Nachricht>");
+		console.registerComand("contact", contactCommand);
+		
 	}
 
 }
