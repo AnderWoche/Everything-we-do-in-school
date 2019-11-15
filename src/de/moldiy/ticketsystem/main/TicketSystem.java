@@ -1,38 +1,32 @@
 package de.moldiy.ticketsystem.main;
 
-import java.util.ArrayList;
-
-
-import de.moldiy.ticketsystem.ticket.Ticket;
+import de.moldiy.ticketsystem.console.ConsoleControl;
+import de.moldiy.ticketsystem.console.command.ContactCommand;
+import de.moldiy.ticketsystem.console.command.ExitCommand;
+import de.moldiy.ticketsystem.console.command.OpenTicketCommand;
+import de.moldiy.ticketsystem.ticket.TicketDatabase;
+import de.moldiy.ticketsystem.ticket.TicketDatabaseTestImpl;
 
 public class TicketSystem {
 	
-	private ArrayList<Ticket> tickets = new ArrayList<Ticket>();
+	private static ConsoleControl console;
+	private static TicketDatabase ticketbase;
 	
-	public void removeTicket(Ticket ticket) {
-		this.tickets.remove(ticket);
+	public TicketSystem() {
+		TicketSystem.console = new ConsoleControl();
+		TicketSystem.ticketbase = new TicketDatabaseTestImpl();
+		
+		TicketSystem.console.registerCommand(new ExitCommand());
+		TicketSystem.console.registerCommand(new OpenTicketCommand());
+		TicketSystem.console.registerCommand(new ContactCommand());
 	}
 	
-	public void addTicket(Ticket ticket) {
-		this.tickets.add(ticket);
+	public static ConsoleControl getConsole() {
+		return TicketSystem.console;
 	}
 	
-	public Ticket findTicket(String title) {
-		for(Ticket t : tickets) {
-			if(t.getTitle().equals(title)) {
-				return t; 
-			}
-		}
-		return null;
+	public static TicketDatabase getTicketDataBase() {
+		return TicketSystem.ticketbase;
 	}
-	
-	public Ticket findTicket(int id) {
-		for(Ticket t : tickets) {
-			if(t.getId() == id) {
-				return t; 
-			}
-		}
-		return null;
-	}
-	
+
 }
