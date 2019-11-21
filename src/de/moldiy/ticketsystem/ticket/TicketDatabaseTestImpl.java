@@ -39,8 +39,7 @@ public class TicketDatabaseTestImpl extends TicketDatabase {
 
 	@Override
 	public void removeTicket(int id) {
-		// TODO Auto-generated method stub
-		
+		this.tickets.remove(this.findTicket(id));
 	}
 
 }
