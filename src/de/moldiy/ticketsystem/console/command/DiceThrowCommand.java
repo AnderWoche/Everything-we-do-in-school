@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Random;
 
@@ -31,7 +32,7 @@ public class DiceThrowCommand extends CommandExecuter {
 		while (true) {
 			// Eingabeaufforderung
 			System.out.print("Bitte geben Sie die Anzahl der Wurfversuche ein: ");
-			
+
 			// Prüfe: Ist die Eingabe eine ganze Zahl im Bereich 1 bis 10?
 			try {
 				String input = bufferedReader.readLine();
@@ -67,23 +68,25 @@ public class DiceThrowCommand extends CommandExecuter {
 
 			// Durchschnittliche Augenzahl bestimmen und ausgeben
 			float average = (float) sumOfPoints / countOfThrows;
-			System.out.printf("Die durchschnittliche Augenzahl beträgt: %.2f%n", average); 
+			System.out.printf("Die durchschnittliche Augenzahl beträgt: %.2f%n", average);
 
-			HashMap<Integer, Integer> countOfApsoluteNumber = new HashMap<Integer, Integer>();
+			// Absolute Häufigkeit bestimmen und ausgeben
+			HashMap<Integer, Integer> countOfAbsoluteNumber = new HashMap<Integer, Integer>();
 			
-			for(int integerInThrowedNumbers : throwNummbers) {
-				if(!countOfApsoluteNumber.containsKey(integerInThrowedNumbers)) {
-					countOfApsoluteNumber.put(integerInThrowedNumbers, 0);
+			for(int diceThrow : throwNummbers) {
+				if(!countOfAbsoluteNumber.containsKey(diceThrow)) {
+					countOfAbsoluteNumber.put(diceThrow, 1);
+				} else {
+					int count = countOfAbsoluteNumber.get(diceThrow);
+					countOfAbsoluteNumber.put(diceThrow, ++count);
 				}
-				int count = countOfApsoluteNumber.get(integerInThrowedNumbers);
-				countOfApsoluteNumber.put(integerInThrowedNumbers, ++count);
 			}
 			
 			System.out.println("Absolute Häufigkeiten:");
-			countOfApsoluteNumber.forEach((key, value) -> {
+			countOfAbsoluteNumber.forEach((key, value) -> {
 				System.out.println("Die zahl " + key + " kommt " + value + " vor.");
 			});
-			
+
 			break;
 		}
 
