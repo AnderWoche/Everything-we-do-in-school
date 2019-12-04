@@ -2,6 +2,7 @@ package de.moldiy.ticketsystem.main;
 
 import de.moldiy.ticketsystem.console.ConsoleControl;
 import de.moldiy.ticketsystem.console.command.ContactCommand;
+import de.moldiy.ticketsystem.console.command.DiceThrowCommand;
 import de.moldiy.ticketsystem.console.command.ExitCommand;
 import de.moldiy.ticketsystem.console.command.OpenTicketCommand;
 import de.moldiy.ticketsystem.ticket.TicketDatabase;
@@ -19,6 +20,7 @@ public class TicketSystem {
 		TicketSystem.console.registerCommand(new ExitCommand());
 		TicketSystem.console.registerCommand(new OpenTicketCommand());
 		TicketSystem.console.registerCommand(new ContactCommand());
+		TicketSystem.console.registerCommand(new DiceThrowCommand());
 	}
 	
 	public static ConsoleControl getConsole() {
