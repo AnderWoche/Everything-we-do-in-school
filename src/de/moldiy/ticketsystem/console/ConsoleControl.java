@@ -3,16 +3,18 @@ package de.moldiy.ticketsystem.console;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
 import de.moldiy.ticketsystem.console.command.CommandExecuter;
+import de.moldiy.ticketsystem.console.command.ExecuteCommand;
+import de.moldiy.ticketsystem.console.command.ExitCommand;
 
 public class ConsoleControl {
 	
 	private BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
-	private ArrayList<CommandExecuter> commands = new ArrayList<CommandExecuter>();
+//	private ArrayList<CommandExecuter> commands = new ArrayList<CommandExecuter>();
+	private HashMap<String, CommandExecuter> commands = new HashMap<String, CommandExecuter>();
 	
 	public ConsoleControl() {
 		new Thread(new Runnable() {
@@ -30,7 +32,7 @@ public class ConsoleControl {
 					if(comandTiles.length > 1) {
 						argsFortheExecutor = Arrays.copyOfRange(comandTiles, 1, comandTiles.length);
 					}
-					CommandExecuter comandExecutor = findCommand(comandTiles[0]);
+					CommandExecuter comandExecutor = commands.get(comandTiles[0]);
 					if(comandExecutor == null) {
 						System.out.println("Befehl exestiert nicht!");
 					} else {
@@ -62,22 +64,31 @@ public class ConsoleControl {
 //		this.commands.put("exit", exitComand);
 	}
 	
-	public CommandExecuter findCommand(String comand) {
-		for(CommandExecuter exe : commands) {
-			if(exe.getCommand().equals(comand)) {
-				return exe;
+	public <T extends CommandExecuter> void registerCommand(T command) {
+		if(ExitCommand.class.isAnnotationPresent(ExecuteCommand.class)) {
+			for(String exeCommand : command.getClass().getAnnotation(ExecuteCommand.class).value()) {
+				if(!this.commands.containsKey(exeCommand)) {
+					this.commands.put(exeCommand, command);
+				} else {
+					throw new CommandNameAlreadyInUseExeption("The ExeCuteCommandName "+ exeCommand +" is already used");
+				}
 			}
+		} else {
+			throw new NoCommandNameExeption("No (ExecuteCommand) Annotation found in the Class");
 		}
-		return null;
 	}
 	
-	public void registerCommand(CommandExecuter comand) {
-		this.commands.add(comand);
+	public class NoCommandNameExeption extends RuntimeException {
+		private static final long serialVersionUID = 1L;
+		public NoCommandNameExeption(String text) {
+			super(text);
+		}
 	}
 	
-	public ArrayList<CommandExecuter> getCommands() {
-		return this.commands;
+	public class CommandNameAlreadyInUseExeption extends RuntimeException {
+		private static final long serialVersionUID = 7470171960944793155L;
+		public CommandNameAlreadyInUseExeption(String text) {
+			super(text);
+		}
 	}
-	
-	
 }

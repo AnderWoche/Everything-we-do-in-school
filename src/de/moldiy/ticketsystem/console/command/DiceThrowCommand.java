@@ -3,18 +3,12 @@ package de.moldiy.ticketsystem.console.command;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.text.NumberFormat;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Random;
 
+@ExecuteCommand({"diceThrow"})
 public class DiceThrowCommand extends CommandExecuter {
-
-	public DiceThrowCommand() {
-		super("diceThrow");
-		// TODO Auto-generated constructor stub
-	}
 
 	/**
 	 * execute the DiceThrow Program.

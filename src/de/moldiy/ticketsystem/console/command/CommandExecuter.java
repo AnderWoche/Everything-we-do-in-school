@@ -7,12 +7,9 @@ package de.moldiy.ticketsystem.console.command;
  */
 public abstract class CommandExecuter {
 
-	private String command = null;
-	
 	private String comandDescription = "";
 	
-	public CommandExecuter(String command) {
-		this.command = command;
+	public CommandExecuter() {
 	}
 	
 	public abstract void executeComand(String[] args);
@@ -23,9 +20,5 @@ public abstract class CommandExecuter {
 	
 	public String getComandDescription() {
 		return this.comandDescription;
-	}
-	
-	public String getCommand() {
-		return this.command;
 	}
 }

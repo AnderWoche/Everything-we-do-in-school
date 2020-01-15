@@ -3,10 +3,10 @@ package de.moldiy.ticketsystem.console.command;
 import de.moldiy.ticketsystem.main.TicketSystem;
 import de.moldiy.ticketsystem.ticket.Ticket;
 
+@ExecuteCommand({"contact"})
 public class ContactCommand extends CommandExecuter {
 
 	public ContactCommand() {
-		super("contact");
 		super.setComandDescription("contact <ticketName> <betreff> <Nachricht>");
 	}
 

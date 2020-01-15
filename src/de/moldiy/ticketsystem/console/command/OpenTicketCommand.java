@@ -3,10 +3,10 @@ package de.moldiy.ticketsystem.console.command;
 import de.moldiy.ticketsystem.main.TicketSystem;
 import de.moldiy.ticketsystem.ticket.Ticket;
 
+@ExecuteCommand({"open"})
 public class OpenTicketCommand extends CommandExecuter {
 	
 	public OpenTicketCommand() {
-		super("open");
 		super.setComandDescription("open <TicketTitle / TicketID>");
 	}
 
