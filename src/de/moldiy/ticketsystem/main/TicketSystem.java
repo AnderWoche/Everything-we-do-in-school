@@ -14,7 +14,7 @@ import de.moldiy.ticketsystem.console.command.ein_dim_arrays.Glaetten;
 import de.moldiy.ticketsystem.console.command.zwei_dim_arrays.Kleine1x1eins;
 import de.moldiy.ticketsystem.console.command.zwei_dim_arrays.Kundendaten;
 import de.moldiy.ticketsystem.console.command.zwei_dim_arrays.ZweiDArrayVerwaltungsProgramm;
-import de.moldiy.ticketsystem.console.command.zwei_dim_arrays.zweiDArraySumme;
+import de.moldiy.ticketsystem.console.command.zwei_dim_arrays.ZweiDArraySumme;
 import de.moldiy.ticketsystem.ticket.TicketDatabase;
 import de.moldiy.ticketsystem.ticket.TicketDatabaseTestImpl;
 
@@ -28,7 +28,7 @@ public class TicketSystem {
 		TicketSystem.ticketbase = new TicketDatabaseTestImpl();
 		
 		TicketSystem.console.registerCommand(new ExitCommand());
-		TicketSystem.console.registerCommand(new zweiDArraySumme());
+		TicketSystem.console.registerCommand(new ZweiDArraySumme());
 		TicketSystem.console.registerCommand(new OpenTicketCommand());
 		TicketSystem.console.registerCommand(new ContactCommand());
 		TicketSystem.console.registerCommand(new DiceThrowCommand());

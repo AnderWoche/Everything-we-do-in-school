@@ -9,7 +9,7 @@ public class Kundendaten extends CommandExecuter {
 	private static final String[] namen = {
 			"Max Schmidt", "Lisa Marx", "Robin Meier",
 			"Lara Huber", "Anna Groﬂ", "Heribert Lehmann",
-			"Harry Potter", "Obi-wam Kenobi", "Julia Kron"
+			"Harry Potter", "Obi-wan Kenobi", "Julia Kron"
 	};
 	
 	private static final int[] alter = {

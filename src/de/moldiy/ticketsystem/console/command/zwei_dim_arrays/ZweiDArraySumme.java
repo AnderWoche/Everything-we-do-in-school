@@ -4,7 +4,7 @@ import de.moldiy.ticketsystem.console.command.CommandExecuter;
 import de.moldiy.ticketsystem.console.command.ExecuteCommand;
 
 @ExecuteCommand({"2dArraySumme"})
-public class zweiDArraySumme extends CommandExecuter {
+public class ZweiDArraySumme extends CommandExecuter {
 
 	private static int[][] array = {
 			{4, 0, 2, 44},	
